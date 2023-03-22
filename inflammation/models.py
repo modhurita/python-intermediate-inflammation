@@ -35,4 +35,4 @@ def daily_min(data):
 
 def daily_std_dev(data):
     """Calculate the daily standard deviation of a 2D inflammation data array."""
-    return np.std(data, axis=0)
+    return np.std(data, axis=1)

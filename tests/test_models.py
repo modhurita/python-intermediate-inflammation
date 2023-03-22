@@ -2,7 +2,7 @@
 
 import numpy as np
 import numpy.testing as npt
-
+import pytest
 
 def test_daily_mean_zeros():
     """Test that mean function works for an array of zeros."""
@@ -29,3 +29,13 @@ def test_daily_mean_integers():
     # Need to use Numpy testing functions to compare arrays
     npt.assert_array_equal(daily_mean(test_input), test_result)
 
+@pytest.mark.parametrize(
+    "test, expected",
+    [
+        ([[0, 0, 0], [0, 0, 0], [0, 0, 0]], [0., 0., 0.]),
+        ([[4, 2, 5], [1, 6, 2], [4, 1, 9]], [1.24721913, 2.1602469, 3.29983165]),
+    ])
+def test_daily_std(test, expected):
+    """Test std function works for zeroes, positive integers."""
+    from inflammation.models import daily_std_dev
+    npt.assert_array_almost_equal(daily_std_dev(np.array(test)), np.array(expected), decimal=2)
